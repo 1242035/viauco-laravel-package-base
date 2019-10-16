@@ -15,6 +15,7 @@ use ReflectionClass;
  */
 abstract class ServiceProvider extends IlluminateServiceProvider
 {
+    protected $defer = true;
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
