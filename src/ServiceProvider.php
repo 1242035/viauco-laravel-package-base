@@ -425,11 +425,11 @@ abstract class ServiceProvider extends IlluminateServiceProvider
     }
 
     /**
-     * Register commanDIRECTORY_SEPARATOR service provider.
+     * Register command service provider.
      *
      * @param  \Illuminate\Support\ServiceProvider|string  $provider
      */
-    protected function registerCommanDIRECTORY_SEPARATOR($provider)
+    protected function registerCommand($provider)
     {
         if ($this->app->runningInConsole())
             $this->app->register($provider);
