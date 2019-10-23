@@ -15,7 +15,9 @@ use ReflectionClass;
  */
 abstract class ServiceProvider extends IlluminateServiceProvider
 {
+    
     protected $defer = true;
+    
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
@@ -167,9 +169,9 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function registerConsoleServiceProvider($provider, array $options = [], $force = false)
     {
-        if ($this->app->runningInConsole())
+        if ($this->app->runningInConsole()) {
             return $this->registerProvider($provider, $options, $force);
-
+        }
         return null;
     }
 
@@ -317,7 +319,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function getDatabasePath()
     {
-        return $this->getBasePath().DIRECTORY_SEPARATOR.'database';
+        return $this->getBasePath() . DIRECTORY_SEPARATOR . 'database';
     }
 
     /**
@@ -327,7 +329,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function getMigrationsPath()
     {
-        return $this->getBasePath().DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'migrations';
+        return $this->getBasePath() . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'migrations';
     }
 
     /**
@@ -347,7 +349,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function getViewsPath()
     {
-        return $this->getResourcesPath().DIRECTORY_SEPARATOR.'views';
+        return $this->getResourcesPath() . DIRECTORY_SEPARATOR . 'views';
     }
 
     /**
@@ -357,7 +359,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function getViewsDestinationPath()
     {
-        return resource_path('views'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.$this->package);
+        return resource_path('views' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . $this->package);
     }
 
     /**
@@ -367,7 +369,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function getTranslationsPath()
     {
-        return $this->getResourcesPath().DIRECTORY_SEPARATOR.'lang';
+        return $this->getResourcesPath() . DIRECTORY_SEPARATOR . 'lang';
     }
 
     /**
@@ -377,7 +379,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function getTranslationsDestinationPath()
     {
-        return resource_path('lang'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.$this->package);
+        return resource_path('lang' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . $this->package);
     }
 
     /* -----------------------------------------------------------------
@@ -431,8 +433,9 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     protected function registerCommand($provider)
     {
-        if ($this->app->runningInConsole())
+        if ($this->app->runningInConsole()) {
             $this->app->register($provider);
+        }
     }
 
     /**
@@ -480,7 +483,9 @@ abstract class ServiceProvider extends IlluminateServiceProvider
             $this->getTranslationsPath() => $this->getTranslationsDestinationPath()
         ], 'lang');
 
-        if ($load) $this->loadTranslations();
+        if ($load) { 
+            $this->loadTranslations();
+        }
     }
 
     /**
@@ -489,7 +494,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
     protected function publishFactories()
     {
         $this->publishes([
-            $this->getDatabasePath().DIRECTORY_SEPARATOR.'factories' => database_path('factories'),
+            $this->getDatabasePath() . DIRECTORY_SEPARATOR . 'factories' => database_path('factories'),
         ], 'factories');
     }
 
@@ -543,7 +548,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
      */
     private function checkPackageName()
     {
-        if (empty($this->vendor) || empty($this->package)) {
+        if ( empty($this->vendor) || empty($this->package) ) {
             throw new PackageException('You must specify the vendor/package name.');
         }
     }
